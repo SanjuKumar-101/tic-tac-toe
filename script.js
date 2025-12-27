@@ -62,3 +62,19 @@ function resetGame() {
   statusText.textContent = "Player X's turn";
   cells.forEach(cell => cell.textContent = "");
 }
+function autoPlay() {
+  if (!gameActive) return;
+
+  const emptyCells = board
+    .map((val, i) => val === "" ? i : null)
+    .filter(v => v !== null);
+
+  if (emptyCells.length === 0) return;
+
+  const randomIndex = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+  cells[randomIndex].click();
+
+  setTimeout(autoPlay, 800);
+}
+
+setTimeout(autoPlay, 1000);
